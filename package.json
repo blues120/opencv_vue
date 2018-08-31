@@ -18,9 +18,13 @@
     "babel-preset-es2015": "^6.24.1",
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
+    "lodash": "latest",
     "muse-ui": "^3.0.0",
+    "muse-ui-message": "^0.2.0",
+    "qs": "latest",
     "style-loader": "^0.22.1",
     "vue": "^2.5.2",
+    "vue-cookie": "^1.1.4",
     "vue-lazyload": "^1.2.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
