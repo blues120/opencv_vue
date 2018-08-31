@@ -6,7 +6,7 @@
       </div>
       <div class="userAndPassword">
         <mu-container>
-          <mu-text-field  v-model="formData.userName"  placeholder="请输入手机号"  icon="account_circle" full-width max-length="30"  ></mu-text-field>
+          <mu-text-field  v-model="formData.userName"  placeholder="请输入用户名"  icon="account_circle" full-width max-length="30"  ></mu-text-field>
           <mu-text-field v-model="formData.password" placeholder="请输入密码" type="password"  icon="locked" full-width max-length="18" ></mu-text-field>
       </mu-container>
       </div>
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     submit () {
-      if (Tools.mobile()) {
+      if (this.formData.userName.length === 0) {
         this.$alert('请输入用户名', '提示')
         return
       }
@@ -60,10 +60,10 @@ export default {
         return
       }
       this.$http({
-        url: this.$http.adornUrl('/app/login'),
+        url: this.$http.adornUrl('/sys/app/login'),
         method: 'post',
         data: this.$http.adornData({
-          'mobile': this.formData.userName,
+          'username': this.formData.userName,
           'password': this.formData.password,
           'uuid': this.formData.uuid,
           'captcha': this.formData.captcha
