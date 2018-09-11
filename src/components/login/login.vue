@@ -71,7 +71,7 @@ export default {
       }).then(({data}) => {
         if (data && data.code === 0) {
           this.$cookie.set('token', data.token)
-          this.$router.replace({ name: 'home' })
+          this.$router.replace({ name: 'root' })
         } else {
           this.getCaptcha()
           this.$alert(data.msg, '提示')
@@ -147,7 +147,7 @@ export default {
   }
 </style>
 
-<style lang="less">
+<style lang="less" scoped>
   .button-wrapper {
     text-align: center;
       margin-right: 10%;
