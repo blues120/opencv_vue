@@ -1,6 +1,9 @@
 <template>
 <div>
-  <router-view></router-view>
+  <keep-alive>
+    <router-view></router-view>
+  </keep-alive>
+
   <div class="Bottom-Nav-Class">
     <mu-container style="max-width: 400px; width:100%;">
       <mu-bottom-nav :value.sync="shift" @change="BottomNavChange">
@@ -21,7 +24,7 @@ export default {
     }
   },
   created () {
-    this.$router.push('/mine')
+    this.$router.push('/home')
   },
   methods: {
     BottomNavChange (value) {
