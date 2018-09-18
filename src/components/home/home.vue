@@ -1,51 +1,42 @@
 
 <template>
-  <div style="background-color: #42b983">
+  <div >
     <mu-paper :z-depth="1" class="demo-list-wrap">
-      <mu-appbar style="width: 100%;" color="primary">
+      <div style="width: 100%;background-color: #2196f3;padding: 1rem">
         <div >
-          <mu-container>
-            <mu-row gutter>
-              <mu-col span="9" style="overflow: hidden">
-                <mu-auto-complete :data="staticArray"  :max-search-results="6"  v-model="dataForm.key" open-on-focus   style="background-color: white"></mu-auto-complete>
-                <!--<mu-button fab small color="red">x</mu-button>-->
-              </mu-col>
+          <mu-auto-complete solo :data="staticArray"  :max-search-results="6"  v-model="dataForm.key" open-on-focus   style="background-color: white"></mu-auto-complete>
 
-              <mu-col span="3">
-                <mu-button normal color="red" @click="search">搜索</mu-button>
-              </mu-col>
-            </mu-row>
-          </mu-container>
+          <mu-button normal color="red" @click="search">搜索</mu-button>
         </div>
-      </mu-appbar>
-      <mu-list textline="two-line" >
-        <div v-for="(item, index) in dataList" :key="index">
-          <mu-list-item avatar :ripple="false" button >
-            <mu-list-item-content>
-              <mu-list-item-title>{{item.cardNo}}</mu-list-item-title>
-              <mu-list-item-sub-title style="color: rgba(0, 0, 0, .87)">{{item.cardName}}</mu-list-item-sub-title>
-              <mu-list-item-sub-title>
-                {{item.updateTime}}
-              </mu-list-item-sub-title>
-            </mu-list-item-content>
-            <mu-list-item-action >
+      </div>
+      <mu-list textline="two-line">
+          <div v-for="(item, index) in dataList"  :key="index"  class="action-btn" @touchstart="BtnTouchStart" @touchend.stop.prevent="BtnTouchEnd" :data-index="index" :id="index" >
+            <div >
+              <li>卡号:{{item.cardNo}}</li>
+              <li>{{item.cardName}}</li>
+              <li>{{item.updateTime}}</li>
+              <mu-divider></mu-divider>
+
+            </div>
+
+            <div style="float: right">
               <div v-if="item.status === 2">
                 卡已经售出
               </div>
               <div v-else-if="item.status === 3">
                 卡已核销
               </div>
-            </mu-list-item-action>
-          </mu-list-item>
-          <mu-divider></mu-divider>
-        </div>
+            </div>
+
+          </div>
 
       </mu-list>
     </mu-paper>
+    <div style="height: 60px"></div>
   </div>
 </template>
 
-<script>
+<script >
 
 export default {
   name: 'home',
@@ -54,6 +45,7 @@ export default {
       dataForm: {
         key: ''
       },
+      tapIndex: 0,
       dataList: [],
       pageIndex: 1,
       pageSize: 20,
@@ -65,6 +57,19 @@ export default {
     this.getDataList()
   },
   methods: {
+    BtnTouchStart (event) {
+      if ($(event.currentTarget).hasClass('action-btn')) {
+        $(event.currentTarget).addClass('activeClass')
+      }
+    },
+    BtnTouchEnd () {
+      if ($(event.currentTarget).hasClass('action-btn')) {
+        $(event.currentTarget).removeClass('activeClass')
+      }
+    },
+    alertTest () {
+      // this.$alert('请输入用户名', '提示')
+    },
     search () {
       this.getDataList()
     },
@@ -88,15 +93,30 @@ export default {
         // this.dataListLoading = false
       })
     }
+
   }
 }
+
 </script>
 
-<style scoped>
+<style scoped lang="less">
   .demo-list-wrap {
     width: 100%;
     max-width: 500px;
 
+  }
+  .action-btn {
+    /*display: block;*/
+    /*color: inherit;*/
+    /*position: relative;*/
+    /*outline: none;*/
+    /*cursor: pointer;*/
+    /*-webkit-overflow-scrolling: touch;*/
+    padding: 1rem 1rem 0rem 2rem;
+
+  }
+  .activeClass{
+    background-color: #e3e3e3;
   }
 
 </style>

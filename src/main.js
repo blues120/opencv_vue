@@ -6,6 +6,7 @@ import router from './router'
 import 'muse-ui/dist/muse-ui.css'
 import httpRequest from '@/utils/httpRequest'
 import { isAuth } from '@/utils' // 权限方法
+import 'jquery'
 import {
   Alert,
   AppBar,

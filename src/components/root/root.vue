@@ -1,8 +1,10 @@
 <template>
 <div>
-  <keep-alive>
-    <router-view></router-view>
-  </keep-alive>
+  <div>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+  </div>
 
   <div class="Bottom-Nav-Class">
     <mu-container style="max-width: 400px; width:100%;">
