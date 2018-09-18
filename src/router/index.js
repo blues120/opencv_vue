@@ -4,6 +4,7 @@ import login from '@/components/login/login'
 import root from '@/components/root/root'
 import home from '@/components/home/home'
 import mine from '@/components/mine/mine'
+import CardSold from '@/components/home/CardSold'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
           component: mine
         }
       ]
+    },
+    {
+      path: '/CardSold',
+      name: 'CardSold',
+      component: CardSold
     }
 
   ]
