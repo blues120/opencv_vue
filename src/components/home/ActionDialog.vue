@@ -1,8 +1,8 @@
 <template>
   <mu-container>
-    <mu-flex justify-content="center">
-      <mu-button @click="openScrollDialog">Open Scroll Dialog</mu-button>
-    </mu-flex>
+    <!--<mu-flex justify-content="center">-->
+      <!--<mu-button @click="openScrollDialog"></mu-button>-->
+    <!--</mu-flex>-->
     <mu-dialog :title="cardNo" width="360" scrollable :open.sync="openScroll">
       <mu-list>
         <div v-if="cardStatus === 0 || cardStatus === 1">

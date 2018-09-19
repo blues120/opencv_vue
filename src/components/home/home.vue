@@ -66,6 +66,7 @@ export default {
   },
   methods: {
     selectActionValue (value) {
+      this.ActionDialogVisible = false
       if (value === '核销') {
         console.log('1')
       } else if (value === '转售') {
