@@ -64,8 +64,8 @@ Vue.prototype.isAuth = isAuth
 // 保存整站vuex本地储存初始状态
 window.axios = axios
 
-axios.defaults.baseURL = 'http://192.168.50.34:8080/memberCard/'
-axios.defaults.autofaceURL = 'http://192.168.50.34:8080/memberCard/'
+axios.defaults.baseURL = 'http://192.168.100.150:8080/memberCard/'
+axios.defaults.autofaceURL = 'http://192.168.100.150:8080/memberCard/'
 
 Vue.use(Message)// 插件
 
