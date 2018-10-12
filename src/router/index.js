@@ -5,6 +5,7 @@ import root from '@/components/root/root'
 import home from '@/components/home/home'
 import mine from '@/components/mine/mine'
 import CardSold from '@/components/home/CardSold'
+import firstPage from '@/components/firstPage/firstPage'
 
 Vue.use(Router)
 
@@ -12,8 +13,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
-      component: login
+      name: 'firstPage',
+      component: firstPage
     },
     {
       path: '/login',
