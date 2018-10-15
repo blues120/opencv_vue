@@ -1,6 +1,5 @@
 <template>
 <div class="background">
-  <photo-view></photo-view>
   <div class="head">简单3步，足不出户，健康解读</div>
   <div class="blockBg">
     <div class="leftTitle">第1步</div>
@@ -54,6 +53,11 @@
     </mu-dialog>
 
   </mu-container>
+  <div style="margin-top:20px;">
+    <!--<input type="file" accept="image/*;" capture="camera" >-->
+    <!--<input type="file" id="upload" accept="image/jpg" title="heh"  @change="upload">-->
+    <!--<label for="upload"></label>-->
+  </div>
 
   <photo-view></photo-view>
 </div>

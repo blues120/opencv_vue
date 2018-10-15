@@ -1,12 +1,12 @@
 <template>
   <div>
     <div style="padding:20px;">
-      <div class="show">
-        <div class="picture" :style="'backgroundImage:url('+headerImage+')'"></div>
-      </div>
+      <!--<div class="show">-->
+        <!--<div class="picture" :style="'backgroundImage:url('+headerImage+')'"></div>-->
+      <!--</div>-->
       <div style="margin-top:20px;">
-        <input type="file" id="upload" accept="image/jpg" @change="upload">
-        <label for="upload"></label>
+        <input type="file" id="upload" accept="image/jpg" title="heh"  @change="upload" capture="camera" style="display: none">
+        <!--<label for="upload"></label>-->
       </div>
     </div>
   </div>
