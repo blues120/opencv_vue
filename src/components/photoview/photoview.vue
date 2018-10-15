@@ -25,6 +25,8 @@ export default {
   },
   methods: {
     upload (e) {
+      this.$emit('closeSimpleDialog')
+
       let files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.picValue = files[0];

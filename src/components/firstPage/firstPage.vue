@@ -47,19 +47,32 @@
         请确保：脸在圈定范围内、美颜已关闭、不戴眼镜、不逆光
       </div>
       <mu-flex class="flex-wrapper" justify-content="center">
-        <mu-button large color="primary" class="startPhotoBg"  @click="closeSimpleDialog">开始拍照</mu-button>
+        <mu-button large color="primary" class="startPhotoBg"  @click="startPictureAlert">开始拍照</mu-button>
       </mu-flex>
 
     </mu-dialog>
 
   </mu-container>
-  <div style="margin-top:20px;">
-    <!--<input type="file" accept="image/*;" capture="camera" >-->
-    <!--<input type="file" id="upload" accept="image/jpg" title="heh"  @change="upload">-->
-    <!--<label for="upload"></label>-->
-  </div>
 
-  <photo-view></photo-view>
+  <photo-view @closeSimpleDialog="closeSimpleDialog"></photo-view>
+
+  <mu-bottom-sheet :open.sync="open">
+    <mu-list  :value.sync="shift" @change="BottomNavChange">
+      <mu-list-item button value="1">
+        <mu-flex class="flex-wrapper" justify-content="center">
+          <div style="text-align: center"><mu-list-item-title>拍照</mu-list-item-title></div>
+        </mu-flex>
+      </mu-list-item>
+      <mu-divider></mu-divider>
+      <mu-list-item button value="2">
+        <mu-flex class="flex-wrapper" justify-content="center" align="center">
+          <div style="text-align: center"><mu-list-item-title>取消</mu-list-item-title></div>
+        </mu-flex>
+
+      </mu-list-item>
+
+    </mu-list>
+  </mu-bottom-sheet>
 </div>
 </template>
 
@@ -69,7 +82,9 @@ export default {
   name: 'firstPage',
   data () {
     return {
-      openSimple: false
+      openSimple: false,
+      open: false,
+      shift: String
     }
   },
   methods: {
@@ -79,8 +94,28 @@ export default {
     openSimpleDialog () {
       this.openSimple = true
     },
+    startPictureAlert () {
+      this.open = true
+    },
     closeSimpleDialog () {
       this.openSimple = false
+      this.open = false
+    },
+    closeBottomSheet () {
+      this.open = false
+    },
+    openBotttomSheet () {
+      this.open = true
+    },
+    BottomNavChange (value) {
+      this.open = false
+      if (value === '1') {
+        var takePicture = document.getElementById('upload')
+        takePicture.click()
+      } else {
+        this.open = false
+        // this.openSimple = false
+      }
     }
   },
   components: {
@@ -237,11 +272,11 @@ export default {
     line-height: 32px;
     margin-left: 8px;
   }
-  .flex-wrapper:first-child {
-    margin-top: 0;
-  }
-  .flex-demo:first-child {
-    margin-left: 0;
-  }
+  /*.flex-wrapper:first-child {*/
+    /*margin-top: 0;*/
+  /*}*/
+  /*.flex-demo:first-child {*/
+    /*margin-left: 0;*/
+  /*}*/
 
 </style>
