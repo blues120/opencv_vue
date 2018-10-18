@@ -6,6 +6,7 @@ import home from '@/components/home/home'
 import mine from '@/components/mine/mine'
 import CardSold from '@/components/home/CardSold'
 import firstPage from '@/components/firstPage/firstPage'
+import seconldPage from '@/components/seconldPage/seconldPage'
 
 Vue.use(Router)
 
@@ -15,6 +16,11 @@ export default new Router({
       path: '/',
       name: 'firstPage',
       component: firstPage
+    },
+    {
+      path: '/seconldPage',
+      name: 'seconldPage',
+      component: seconldPage
     },
     {
       path: '/login',

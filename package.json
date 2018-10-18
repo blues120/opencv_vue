@@ -17,6 +17,7 @@
     "axios": "^0.18.0",
     "babel-preset-es2015": "^6.24.1",
     "css-loader": "^0.28.11",
+    "exif-js": "^2.3.0",
     "file-loader": "^1.1.11",
     "html2canvas": "^1.0.0-alpha.12",
     "jquery": "^3.3.1",

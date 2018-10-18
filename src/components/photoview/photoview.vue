@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import {Exif} from './exif.js'
+  import Exif from 'exif-js'
 
 export default {
   data () {
@@ -53,6 +53,10 @@ export default {
             let result = this.result;
             let img = new Image();
             img.src = result;
+
+            self.headerImage = this.result;
+            self.postImg()
+            return
             //判断图片是否大于100K,是就直接上传，反之压缩图片
             if (this.result.length <= (100 * 1024)) {
               self.headerImage = this.result;
@@ -69,6 +73,12 @@ export default {
       },
       postImg () {
         //这里写接口
+        this.$router.push({
+          name: 'seconldPage',
+          params: {
+            picValue: this.headerImage
+          }
+        })
       },
       rotateImg (img, direction,canvas) {
         //最小与最大旋转方向，图片旋转4次后回到原方向

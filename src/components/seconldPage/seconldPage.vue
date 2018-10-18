@@ -16,9 +16,7 @@ export default {
     return {
       curIndex: 0,
       imgArr: [
-        require('../assets/imgs/temp1.png'),
-        require('../assets/imgs/temp2.png'),
-        require('../assets/imgs/temp3.png')
+        require('../../assets/face-mask.png')
       ],
       imgUrl: '',
       initTouchX: 0,
@@ -38,6 +36,9 @@ export default {
         lastScale: 1
       }
     }
+  },
+  created () {
+    this.imgUrl = this.$route.params.picValue
   },
   mounted () {
     this.previewImg = document.querySelector('#preview-img')
@@ -67,13 +68,14 @@ export default {
           that.myImg.position.x = 0
           that.myImg.position.y = 0
           that.myImg.scale = 1
+          var rotateCanvas = document.createElement('canvas')
           var orientation
           that.previewImg.addEventListener('load', function () {
             Exif.getData(that.previewImg, function () { // 获取图像的数据
               Exif.getAllTags(this) // 获取图像的全部数据，值以对象的方式返回
               orientation = Exif.getTag(this, 'Orientation') // 获取图像的拍摄方向
-              var rotateCanvas = document.createElement('canvas'),
-                rotateCtx = rotateCanvas.getContext('2d')
+
+              var rotateCtx = rotateCanvas.getContext('2d')
               // 针对图像方向进行处理
               switch (orientation) {
                 case 1 :
@@ -107,7 +109,7 @@ export default {
                   rotateCanvas.height = that.previewImg.height
                   rotateCtx.drawImage(that.previewImg, 0, 0, that.previewImg.width, that.previewImg.height)
               }
-              var rotateBase64 = rotateCanvas.toDataURL('image/jpeg', 0.5)
+              rotateCanvas.toDataURL('image/jpeg', 0.5)
             })
           })
         })
