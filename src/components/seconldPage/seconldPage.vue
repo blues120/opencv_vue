@@ -3,13 +3,23 @@
     <div class="preview-box">
       <img :src="imgUrl" id="preview-img" :style="{transform:'scale('+ myImg.scale+ ') translate('+myImg.position.x+'px,'+myImg.position.y+'px)'}" @touchstart="getPosition($event)" @touchmove="getMovePosition($event)" @touchend="getLeavePosition($event)">
     </div>
-    <img :src="imgArr[curIndex]" id="preview-bg" @touchstart="getInitPosition($event)" @touchmove="getMovePosition($event)" @touchend="getLeavePosition($event)">
+    <img :src="imgArr[curIndex]" style="height: 75%" id="preview-bg" @touchstart="getInitPosition($event)" @touchmove="getMovePosition($event)" @touchend="getLeavePosition($event)">
+    <div class="alertTitle">请确保<br/>脸在圈定范围内、美颜已关闭、不戴眼镜、不逆光</div>
+    <div class="BottomBg">
+      <mu-flex class="flex-wrapper" align-items="center" justify-content="around">
+        <mu-button color="primary" class="startPhotoBg"  @click="reTakePhoto">重新拍照</mu-button>
+        <mu-button color="primary" class="startPhotoBg"  @click="goBack">上一步</mu-button>
+        <mu-button color="primary" class="startPhotoBg"  @click="nextStep">进入舌诊</mu-button>
+      </mu-flex>
+    </div>
+    <PhotoView></PhotoView>
   </div>
 </template>
 
 <script>
 import html2canvas from 'html2canvas'
 import Exif from 'exif-js'
+import PhotoView from '@/components/photoview/photoview'
 export default {
   name: 'seconldPage',
   data () {
@@ -37,6 +47,9 @@ export default {
       }
     }
   },
+  components: {
+    PhotoView
+  },
   created () {
     this.imgUrl = this.$route.params.picValue
   },
@@ -57,6 +70,16 @@ export default {
     }, false)
   },
   methods: {
+    reTakePhoto () {
+      var takePicture = document.getElementById('upload')
+      takePicture.click()
+    },
+    goBack () {
+      this.$router.go(-1)
+    },
+    nextStep () {
+
+    },
     getPhoto () {
       var imageInput = document.querySelector('#image-input')
       var that = this
@@ -198,15 +221,15 @@ export default {
 
 <style lang="less">
   .photo-box {
-    margin: 0.4rem auto 0.2rem auto;
-    width: 6.4rem;
-    height: 6rem;
-    background: #f00;
+    /*margin: 0.4rem auto 0.2rem auto;*/
+    height: 100%;
+    width: 100%;
+    background: #ddd;
     position: relative;
     overflow: hidden;
     img {
-      width: 6.4rem;
-      height: 6rem;
+      height: 100%;
+      width: 100%;
       position: absolute;
       z-index: 99;
     }
@@ -215,8 +238,9 @@ export default {
       z-index: 9;
       left: 0;
       top: 0;
-      width: 50%;
-      height: 50%;
+      width: 100%;
+      height: 100%;
+      /*background-color: red;*/
     }
   }
 </style>
@@ -224,5 +248,40 @@ export default {
   #imgCanvas{
     width: 600px;
     height: 400px;
+  }
+  .alertTitle{
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    font-size: 14px;
+    line-height: 1.5;
+    color: white;
+    text-align: center;
+    text-shadow: rgb(150, 150, 150) 0px 2px 4px;
+    z-index: 99;
+  }
+  .BottomBg{
+    z-index: 99;
+    position: fixed;
+    bottom: 0px;
+    height: 70px;
+    width: 100%;
+    background-color: rgba(58, 61, 67, 0.5);
+    overflow: hidden;
+  }
+  .flex-wrapper {
+    width: 100%;
+    height: 70px;
+    /*margin-top: 8px;*/
+  }
+  .flex-demo {
+    /*width: 80px;*/
+    /*height: 40px;*/
+    /*background-color: rgba(58, 61, 67, 0.5);*/
+    /*text-align: center;*/
+    /*line-height: 40px;*/
+    /*margin-left: 8px;*/
   }
 </style>
