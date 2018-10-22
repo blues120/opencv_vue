@@ -10,7 +10,22 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      "/api": {//以/proxy/为开头的适合这个规则
+        target: "https://openapi-dev.zhiyuntcm.com",//目标地址
+        "secure": true,//false为http访问，true为https访问
+        "changeOrigin": true,//跨域访问设置，true代表跨域
+        "pathRewrite": {//路径改写规则
+          "^/api": "/api"//以/proxy/为开头的改写为''
+          //下面这种也行
+          //  "^/api":"/list"//以/api/为开头的改写为'/list'
+        },
+        "headers": {//设置请求头伪装成手机端的访问
+          "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Mobile Safari/537.36"
+        }
+      }
+    }
+    ,
 
     // Various Dev Server settings
     host: '192.168.100.150', // can be overwritten by process.env.HOST

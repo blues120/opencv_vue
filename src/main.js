@@ -3,9 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 import 'muse-ui/dist/muse-ui.css'
-import httpRequest from '@/utils/httpRequest'
-import { isAuth } from '@/utils' // 权限方法
+// import httpRequest from '@/utils/httpRequest'
+// import { isAuth } from '@/utils' // 权限方法
 import 'jquery'
 import {
   Alert,
@@ -56,20 +57,20 @@ import 'muse-ui/lib/styles/theme.less'
 
 import 'muse-ui-message/dist/muse-ui-message.css'
 import Message from 'muse-ui-message'
-import axios from 'axios'
+// import axios from 'axios'
 import VueCookie from 'vue-cookie'
 // 挂载全局
-Vue.prototype.$http = httpRequest // ajax请求方法
-Vue.prototype.isAuth = isAuth
-// 保存整站vuex本地储存初始状态
-window.axios = axios
+// Vue.prototype.$http = httpRequest // ajax请求方法
+// Vue.prototype.isAuth = isAuth
+// // 保存整站vuex本地储存初始状态
+// window.axios = axios
 
-axios.defaults.baseURL = 'http://192.168.100.150:8080/memberCard/'
-axios.defaults.autofaceURL = 'http://192.168.100.150:8080/memberCard/'
-
-Vue.use(Message)// 插件
+// axios.defaults.baseURL = 'http://192.168.100.150:8080/memberCard'
+// axios.defaults.autofaceURL = 'http://192.168.100.150:8080/memberCard'
 
 Vue.use(VueCookie)
+
+Vue.use(Message)// 插件
 
 Vue.use(Alert)
 Vue.use(AppBar)
@@ -119,6 +120,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

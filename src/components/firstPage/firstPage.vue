@@ -87,6 +87,9 @@ export default {
       shift: String
     }
   },
+  mounted: function () {
+    this.$store.dispatch('ZW_LOGIN')
+  },
   methods: {
     nextBtn: function () {
       console.log('123')
