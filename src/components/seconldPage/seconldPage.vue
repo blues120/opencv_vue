@@ -12,6 +12,22 @@
         <mu-button color="primary" class="startPhotoBg"  @click="nextStep">进入舌诊</mu-button>
       </mu-flex>
     </div>
+    <mu-container>
+      <mu-dialog  width="360" :open.sync="openSimple">
+        <!--<mu-button slot="actions" flat color="primary" @click="closeSimpleDialog">Close</mu-button>-->
+        <div class="exampleTitle">面诊失败,请重新拍照</div>
+        <img src="./../../assets/face-guidance.jpg"  alt="faceGuidence" style="width: 100%" />
+        <div class="blackTitle">
+          请确保：脸在圈定范围内、美颜已关闭、不戴眼镜、不逆光
+        </div>
+        <mu-flex class="flex-wrapper" justify-content="center">
+          <mu-button large color="primary" class="startPhotoBg"  @click="reTakePhoto">重新拍照</mu-button>
+        </mu-flex>
+
+      </mu-dialog>
+
+    </mu-container>
+
     <PhotoView></PhotoView>
   </div>
 </template>
@@ -24,6 +40,7 @@ export default {
   name: 'seconldPage',
   data () {
     return {
+      openSimple: false,
       curIndex: 0,
       imgArr: [
         require('../../assets/face-mask.png')
@@ -71,6 +88,8 @@ export default {
   },
   methods: {
     reTakePhoto () {
+      this.openSimple = false
+      this.$router.go(-1)
       var takePicture = document.getElementById('upload')
       takePicture.click()
     },
@@ -78,7 +97,7 @@ export default {
       this.$router.go(-1)
     },
     nextStep () {
-
+      this.createPhoto()
     },
     getPhoto () {
       var imageInput = document.querySelector('#image-input')
@@ -201,17 +220,16 @@ export default {
           scale: scale,
           useCORS: true
         }).then(function (canvas) {
+          var file = new Image()
           var dataUrl = canvas.toDataURL('image/jpg')
-          localStorage.imgData = dataUrl
-          that.$router.push({
-            name: 'share',
-            params: {
-              storage: 'imgData'
-            }
+          file.src = dataUrl
+          file.name = 'photo'
+          that.$store.dispatch('ZW_UPLOAD_FACE', file).then(res => {
+            that.openSimple = true
           })
         })
       } else {
-        alert('请上传图片')
+        this.$alert('重新上传图片', '提示')
       }
     }
   }
@@ -270,6 +288,16 @@ export default {
     width: 100%;
     background-color: rgba(58, 61, 67, 0.5);
     overflow: hidden;
+  }
+  .exampleTitle{
+    color: red;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    line-height: 1;
+    min-height: 16px;
+    font-weight: normal;
+    margin: 0px 0px 16px;
   }
   .flex-wrapper {
     width: 100%;

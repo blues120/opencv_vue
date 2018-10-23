@@ -89,6 +89,8 @@ export default {
   },
   mounted: function () {
     this.$store.dispatch('ZW_LOGIN')
+    // var file = new Image()
+    // this.$store.dispatch('ZW_UPLOAD_FACE', file)
   },
   methods: {
     nextBtn: function () {
