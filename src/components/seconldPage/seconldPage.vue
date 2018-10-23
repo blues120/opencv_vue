@@ -36,6 +36,7 @@
 import html2canvas from 'html2canvas'
 import Exif from 'exif-js'
 import PhotoView from '@/components/photoview/photoview'
+import Tools from '../../utils/Tools.js'
 export default {
   name: 'seconldPage',
   data () {
@@ -220,10 +221,8 @@ export default {
           scale: scale,
           useCORS: true
         }).then(function (canvas) {
-          var file = new Image()
           var dataUrl = canvas.toDataURL('image/jpg')
-          file.src = dataUrl
-          file.name = 'photo'
+          var file = Tools.dataURLtoFile(dataUrl)
           that.$store.dispatch('ZW_UPLOAD_FACE', file).then(res => {
             that.openSimple = true
           })
