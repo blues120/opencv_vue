@@ -224,7 +224,13 @@ export default {
           var dataUrl = canvas.toDataURL('image/jpg')
           var file = Tools.dataURLtoFile(dataUrl)
           that.$store.dispatch('ZW_UPLOAD_FACE', file).then(res => {
-            that.openSimple = true
+            if (res === true) {
+              that.$router.push({'name': 'login'})
+            } else {
+              that.openSimple = true
+            }
+          }, error => {
+            console.log(error)
           })
         })
       } else {
