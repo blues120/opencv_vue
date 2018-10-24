@@ -28,7 +28,28 @@
 
     </mu-container>
 
+    <mu-bottom-sheet :open.sync="sheetOpen">
+      <mu-list  :value.sync="shift" @change="BottomNavChange">
+        <mu-list-item button value="1">
+          <mu-flex class="sheet-wrapper" justify-content="center">
+            <div style="text-align: center"><mu-list-item-title>拍照</mu-list-item-title></div>
+          </mu-flex>
+        </mu-list-item>
+        <mu-divider></mu-divider>
+        <mu-list-item button value="2">
+          <mu-flex class="sheet-wrapper" justify-content="center" align="center">
+            <div style="text-align: center"><mu-list-item-title>取消</mu-list-item-title></div>
+          </mu-flex>
+
+        </mu-list-item>
+
+      </mu-list>
+    </mu-bottom-sheet>
+
+
+
     <PhotoView></PhotoView>
+
   </div>
 </template>
 
@@ -41,7 +62,10 @@ export default {
   name: 'seconldPage',
   data () {
     return {
+      sheetOpen: false,
+      shift: String,
       openSimple: false,
+
       curIndex: 0,
       imgArr: [
         require('../../assets/face-mask.png')
@@ -88,11 +112,22 @@ export default {
     }, false)
   },
   methods: {
+    BottomNavChange (value) {
+      this.sheetOpen = false
+      if (value === '1') {
+        this.openSimple = false
+        var takePicture = document.getElementById('upload')
+        takePicture.click()
+      } else {
+        this.sheetOpen = false
+      }
+    },
     reTakePhoto () {
-      this.openSimple = false
-      this.$router.go(-1)
-      var takePicture = document.getElementById('upload')
-      takePicture.click()
+      this.sheetOpen = true
+      // this.openSimple = false
+      // this.$router.go(-1)
+      // var takePicture = document.getElementById('upload')
+      // takePicture.click()
     },
     goBack () {
       this.$router.go(-1)
@@ -210,7 +245,7 @@ export default {
     },
     createPhoto () {
       if (this.imgUrl) {
-        let photoBox = document.querySelector('.photo-box')
+        let photoBox = document.querySelector('.preview-box')
         let newImgWidth = photoBox.style.offsetWidth
         let newImgHeight = photoBox.style.offsetHeight
         let scale = window.devicePixelRatio
@@ -221,11 +256,11 @@ export default {
           scale: scale,
           useCORS: true
         }).then(function (canvas) {
-          var dataUrl = canvas.toDataURL('image/jpg')
+          var dataUrl = canvas.toDataURL('image/jpg', 0.5)
           var file = Tools.dataURLtoFile(dataUrl)
           that.$store.dispatch('ZW_UPLOAD_FACE', file).then(res => {
             if (res === true) {
-              that.$router.push({'name': 'login'})
+              // that.$router.push({'name': 'login'})
             } else {
               that.openSimple = true
             }
@@ -247,7 +282,7 @@ export default {
     /*margin: 0.4rem auto 0.2rem auto;*/
     height: 100%;
     width: 100%;
-    background: #ddd;
+    background: #f5f5f5;
     position: relative;
     overflow: hidden;
     img {
@@ -308,6 +343,11 @@ export default {
     width: 100%;
     height: 70px;
     /*margin-top: 8px;*/
+  }
+  .sheet-wrapper {
+    width: 100%;
+    height: 56px;
+    margin-top: 8px;
   }
   .flex-demo {
     /*width: 80px;*/
