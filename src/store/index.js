@@ -12,7 +12,8 @@ export default new Vuex.Store({
     faceDetectRes: true,
     faceId: '',
     toneDetectRes: true,
-    toneId: ''
+    toneId: '',
+    questions: []
 
   },
   actions: {
@@ -55,6 +56,38 @@ export default new Vuex.Store({
             return reject(error)
           })
       })
+    },
+    ZW_UPLOAD_TONGUE: function ({ commit }, file) {
+      return new Promise((resolve, reject) => {
+        let param = new FormData() // 创建form对象
+
+        param.append('photo', file) // 通过append向form对象添加数据
+        param.append('chunk', '0') // 添加form表单中其他数据
+        console.log(param.get('photo')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
+        let config = {
+          headers: {'Content-Type': 'multipart/form-data', 'X-ZHIYUN-API-TOKEN': this.state.token}
+        }
+        // 添加请求头
+        axios.post('/api/photos/tongue', param, config)
+          .then(response => {
+            console.log(response.data)
+            const detectRes = response.data['detectRes']
+            const id = response.data['id']
+            commit('SET_TONG_DETECT_RES', { tongDetectRes: detectRes })
+            commit('SET_TONG_ID', { tongueId: id })
+            return resolve(detectRes)
+          }, error => {
+            return reject(error)
+          })
+      })
+    },
+    ZW_GET_QUESTIONS: function ({ commit }) {
+      axios.post('/api/questions').then(result => {
+        console.log(result.data)
+        const questions = result.data
+
+        commit('SET_QUESTIONS', { questions: questions })
+      })
     }
   },
   mutations: {
@@ -73,12 +106,16 @@ export default new Vuex.Store({
     SET_FACE_ID: (state, { id }) => {
       state.faceId = id
     },
-    SET_TONG_DETECT_RES: (state, { faceDetectRes }) => {
-      state.tongDetectRes = faceDetectRes
+    SET_TONG_DETECT_RES: (state, { tongDetectRes }) => {
+      state.tongDetectRes = tongDetectRes
     },
     SET_TONG_ID: (state, { id }) => {
       state.tongId = id
+    },
+    SET_QUESTIONS: (state, { questions }) => {
+      state.questions = questions
     }
+
   },
   getters: {
     // faceDetectRes: state => {

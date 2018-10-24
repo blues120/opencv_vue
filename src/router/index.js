@@ -1,12 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import login from '@/components/login/login'
-import root from '@/components/root/root'
-import home from '@/components/home/home'
-import mine from '@/components/mine/mine'
-import CardSold from '@/components/home/CardSold'
+// import login from '@/components/login/login'
 import firstPage from '@/components/firstPage/firstPage'
 import seconldPage from '@/components/seconldPage/seconldPage'
+import thirdPage from '@/components/thirdPage/thirdPage'
+import questionOne from '@/components/questions/question_1'
 
 Vue.use(Router)
 
@@ -23,30 +21,14 @@ export default new Router({
       component: seconldPage
     },
     {
-      path: '/login',
-      name: 'login',
-      component: login
+      path: '/thirdPage',
+      name: 'thirdPage',
+      component: thirdPage
     },
     {
-      path: '/root',
-      name: 'root',
-      component: root,
-      children: [
-        {
-          path: '/home',
-          name: 'home',
-          component: home
-        }, {
-          path: '/mine',
-          name: 'mine',
-          component: mine
-        }
-      ]
-    },
-    {
-      path: '/CardSold',
-      name: 'CardSold',
-      component: CardSold
+      path: '/questionOne',
+      name: 'questionOne',
+      component: questionOne
     }
 
   ]

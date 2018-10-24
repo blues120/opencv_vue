@@ -54,7 +54,7 @@
 
   </mu-container>
 
-  <photo-view @closeSimpleDialog="closeSimpleDialog"></photo-view>
+  <photo-view @closeSimpleDialog="closeSimpleDialog" :commonFlag="false"></photo-view>
 
   <mu-bottom-sheet :open.sync="open">
     <mu-list  :value.sync="shift" @change="BottomNavChange">

@@ -5,7 +5,7 @@
         <!--<div class="picture" :style="'backgroundImage:url('+headerImage+')'"></div>-->
       <!--</div>-->
       <div style="margin-top:20px;">
-        <input type="file" id="upload" accept="image/jpg" title="heh"  @change="upload" capture="camera" style="display: none">
+        <input type="file" id="upload" ref="referenceUpload" accept="image/jpg" title="heh"  @change="upload" capture="camera" style="display: none">
         <!--<label for="upload"></label>-->
       </div>
     </div>
@@ -16,6 +16,10 @@
   import Exif from 'exif-js'
 
 export default {
+  name: 'PhotoView',
+  props:{
+    commonFlag: Boolean
+  },
   data () {
     return {
       headerImage:'',picValue:''
@@ -25,6 +29,7 @@ export default {
   },
   methods: {
     upload (e) {
+      //
       this.$emit('closeSimpleDialog')
 
       let files = e.target.files || e.dataTransfer.files;
@@ -32,6 +37,25 @@ export default {
       this.picValue = files[0];
       this.imgPreview(this.picValue);
       console.log(this.picValue)
+    },
+    postImg () {
+      //这里写接口
+      if (this.commonFlag === false) {
+        this.$router.push({
+          name: 'seconldPage',
+          params: {
+            picValue: this.headerImage
+          }
+        })
+      }else{
+        this.$router.push({
+          name: 'thirdPage',
+          params: {
+            picValue: this.headerImage
+          }
+        })
+      }
+
     },
     imgPreview (file) {
       let self = this;
@@ -71,34 +95,25 @@ export default {
           }
         }
       },
-      postImg () {
-        //这里写接口
-        this.$router.push({
-          name: 'seconldPage',
-          params: {
-            picValue: this.headerImage
-          }
-        })
-      },
-      rotateImg (img, direction,canvas) {
+    rotateImg (img, direction,canvas) {
         //最小与最大旋转方向，图片旋转4次后回到原方向
-        const min_step = 0;
-        const max_step = 3;
+        const minStep = 0;
+        const maxStep = 3;
         if (img == null)return;
         //img的高度和宽度不能在img元素隐藏后获取，否则会出错
         let height = img.height;
         let width = img.width;
         let step = 2;
         if (step == null) {
-            step = min_step;
+            step = minStep;
         }
         if (direction == 'right') {
             step++;
             //旋转到原位置，即超过最大值
-            step > max_step && (step = min_step);
+            step > maxStep && (step = minStep);
         } else {
             step--;
-            step < min_step && (step = max_step);
+            step < minStep && (step = maxStep);
         }
         //旋转角度以弧度值为参数
         let degree = step * 90 * Math.PI / 180;
