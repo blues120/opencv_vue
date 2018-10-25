@@ -1,13 +1,13 @@
 <template>
-<div>
-  <questionCommon :index="1"></questionCommon>
-</div>
+  <div>
+    <questionCommon :index="10"></questionCommon>
+  </div>
 </template>
 
 <script>
 import questionCommon from '@/components/questions/questionCommon'
 export default {
-  name: 'question_1',
+  name: 'question_10',
   components: {
     questionCommon
   },

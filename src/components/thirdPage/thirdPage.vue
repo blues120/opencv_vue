@@ -135,7 +135,7 @@ export default {
     nextStep () {
       if (this.$store.state.tongDetectRes === true) {
         this.$router.push({
-          'name': 'questionOne'
+          'name': 'question1'
         })
       } else {
         this.createPhoto()
@@ -284,7 +284,7 @@ export default {
       this.$store.dispatch('ZW_UPLOAD_TONGUE', file).then(res => {
         if (res === true) {
           this.$router.push({
-            'name': 'questionOne'
+            'name': 'question1'
           })
         } else {
           this.openSimple = true

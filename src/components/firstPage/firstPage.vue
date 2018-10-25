@@ -87,17 +87,32 @@ export default {
       shift: String
     }
   },
+  created () {
+    this.$store.dispatch('ZW_LOGIN').then(res => {
+      this.getQuestions()
+    })
+  },
   mounted: function () {
-    this.$store.dispatch('ZW_LOGIN')
+
     // var file = new Image()
     // this.$store.dispatch('ZW_UPLOAD_FACE', file)
   },
   methods: {
+    getQuestions () {
+      this.$store.dispatch('ZW_GET_QUESTIONS').then(res => {
+
+      }, error => {
+        console.log(error)
+      })
+    },
     nextBtn: function () {
       console.log('123')
     },
     openSimpleDialog () {
-      this.openSimple = true
+      this.$router.push({
+        'name': 'question1'
+      })
+      // this.openSimple = true
     },
     startPictureAlert () {
       this.open = true

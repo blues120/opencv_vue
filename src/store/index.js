@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 // import httpRequest from '@/utils/httpRequest'
 import axios from 'axios'
+// import Tools from '../utils/Tools.js'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -18,19 +19,24 @@ export default new Vuex.Store({
   },
   actions: {
     ZW_LOGIN: function ({ commit }) {
-      axios.post('/api/tokens', {
-        'loginName': 'meishou',
-        'password': 'meishou123'
-      }).then(result => {
-        console.log(result.data)
-        const token = result.data['token']
-        const agencyInfo = result.data['agencyInfo']
+      return new Promise((resolve, reject) => {
+        axios.post('/api/tokens', {
+          'loginName': 'meishou',
+          'password': 'meishou123'
+        }).then(result => {
+          console.log(result.data)
+          const token = result.data['token']
+          const agencyInfo = result.data['agencyInfo']
 
-        const loginName = agencyInfo['loginName']
-        const registrationUrl = agencyInfo['registration_url']
-        commit('SET_TOKEN', { token: token })
-        commit('SET_LOGIN_NAME', { loginName: loginName })
-        commit('SET_REGISTER_URL', { registration_url: registrationUrl })
+          const loginName = agencyInfo['loginName']
+          const registrationUrl = agencyInfo['registration_url']
+          commit('SET_TOKEN', { token: token })
+          commit('SET_LOGIN_NAME', { loginName: loginName })
+          commit('SET_REGISTER_URL', { registration_url: registrationUrl })
+          return resolve(loginName)
+        }, error => {
+          return reject(error)
+        })
       })
     },
     ZW_UPLOAD_FACE: function ({ commit }, file) {
@@ -82,11 +88,18 @@ export default new Vuex.Store({
       })
     },
     ZW_GET_QUESTIONS: function ({ commit }) {
-      axios.post('/api/questions').then(result => {
-        console.log(result.data)
-        const questions = result.data
-
-        commit('SET_QUESTIONS', { questions: questions })
+      return new Promise((resolve, reject) => {
+        let config = {
+          headers: {'X-ZHIYUN-API-TOKEN': this.state.token}
+        }
+        axios.get('/api/questions', config).then(result => {
+          console.log(result.data)
+          const questions = result.data.data
+          commit('SET_QUESTIONS', { questions: questions })
+          return resolve(questions)
+        }, error => {
+          return reject(error)
+        })
       })
     }
   },
@@ -114,6 +127,11 @@ export default new Vuex.Store({
     },
     SET_QUESTIONS: (state, { questions }) => {
       state.questions = questions
+    },
+    REPAIR_QUESTIONS: (state, objc) => {
+      var aObjc = state.questions[objc.index]
+      aObjc['answer'] = objc.answer
+      state.questions[objc.index] = aObjc
     }
 
   },
