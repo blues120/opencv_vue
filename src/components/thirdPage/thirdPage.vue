@@ -193,7 +193,7 @@ export default {
                   rotateCanvas.height = that.previewImg.height
                   rotateCtx.drawImage(that.previewImg, 0, 0, that.previewImg.width, that.previewImg.height)
               }
-              rotateCanvas.toDataURL('image/jpeg', 0.5)
+              rotateCanvas.toDataURL('image/jpeg', 0.1)
             })
           })
         })
@@ -315,7 +315,7 @@ export default {
           img.src = result
 
           // 判断图片是否大于100K,是就直接上传，反之压缩图片
-          if (this.result.length <= (3 * 1024)) {
+          if (this.result.length <= (8 * 1024)) {
             self.headerImage = this.result
             self.uploadImage()
           } else {

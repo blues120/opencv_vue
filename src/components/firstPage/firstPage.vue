@@ -109,10 +109,11 @@ export default {
       console.log('123')
     },
     openSimpleDialog () {
-      this.$router.push({
-        'name': 'question1'
-      })
-      // this.openSimple = true
+      // this.$router.push({
+      //   'name': 'question1'
+      // })
+      // window.location.href = 'https://openapi-dev.zhiyuntcm.com/#/report/SRsNvShmjy2ubXlA'
+      this.openSimple = true
     },
     startPictureAlert () {
       this.open = true

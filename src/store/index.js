@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 // import httpRequest from '@/utils/httpRequest'
 import axios from 'axios'
 // import Tools from '../utils/Tools.js'
+// import qs from 'qs'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -101,6 +102,37 @@ export default new Vuex.Store({
           return reject(error)
         })
       })
+    },
+    ZW_EXAMINATIONS: function ({ commit }) {
+      return new Promise((resolve, reject) => {
+        var tempArray = []
+        for (let i = 0; i < this.state.questions.length; i++) {
+          var tempObjc = this.state.questions[i]
+          var newObjc = {}
+          newObjc['id'] = tempObjc['id'] + ''
+          newObjc['answer'] = tempObjc['answer']
+          tempArray.push(newObjc)
+        }
+        console.log(tempArray)
+        let config = {
+          headers: {'X-ZHIYUN-API-TOKEN': this.state.token}
+        }
+        let that = this
+        console.log(that.state.faceId)
+        console.log(that.state.tongId)
+        console.log(that.state.questions)
+        axios.post('/api/examinations', {
+          'face_result_id': that.state.faceId + '',
+          'tongue_result_id': that.state.tongId + '',
+          'answers': tempArray
+        }, config).then(result => {
+          console.log(result.data)
+
+          return resolve(result.data)
+        }, error => {
+          return reject(error)
+        })
+      })
     }
   },
   mutations: {
@@ -116,14 +148,14 @@ export default new Vuex.Store({
     SET_FACE_DETECT_RES: (state, { faceDetectRes }) => {
       state.faceDetectRes = faceDetectRes
     },
-    SET_FACE_ID: (state, { id }) => {
-      state.faceId = id
+    SET_FACE_ID: (state, { faceId }) => {
+      state.faceId = faceId
     },
     SET_TONG_DETECT_RES: (state, { tongDetectRes }) => {
       state.tongDetectRes = tongDetectRes
     },
-    SET_TONG_ID: (state, { id }) => {
-      state.tongId = id
+    SET_TONG_ID: (state, { tongueId }) => {
+      state.tongId = tongueId
     },
     SET_QUESTIONS: (state, { questions }) => {
       state.questions = questions

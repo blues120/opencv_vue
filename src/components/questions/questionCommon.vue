@@ -30,7 +30,7 @@
         <div v-if="index===1">上一页</div>
         <div v-else>上一题</div>
       </button>
-      <button class="rightBtnClass" @click="nextPage">
+      <button class="rightBtnClass" @click="nextPage" v-if="answerArray.length !== 0">
         下一题
       </button>
     </mu-flex>
@@ -115,13 +115,17 @@ export default {
         'index': this.index - 1,
         'answer': this.answerArray
       })
-      var tempName = 'question' + (this.index + 1)
-      this.$router.push({
-        name: tempName
-      })
+
       console.log(this.$store.state.questions)
       if (this.index === 13) {
-
+        this.$store.dispatch('ZW_EXAMINATIONS').then(res => {
+          window.location.href = res['report_url']
+        })
+      } else {
+        var tempName = 'question' + (this.index + 1)
+        this.$router.push({
+          name: tempName
+        })
       }
     }
   }
