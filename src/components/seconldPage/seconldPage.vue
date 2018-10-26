@@ -110,10 +110,16 @@ export default {
   components: {
     PhotoView
   },
+  activated () {
+    console.log('activated')
+    this.imgUrl = this.$store.state.faceHeadImage
+  },
   created () {
+    console.log('created')
     this.imgUrl = this.$route.params.picValue
   },
   mounted () {
+    console.log('mounted')
     this.previewImg = document.querySelector('#preview-img')
     document.addEventListener('touchstart', function (event) {
       if (event.touches.length > 1) {

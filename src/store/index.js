@@ -15,7 +15,9 @@ export default new Vuex.Store({
     faceId: '',
     toneDetectRes: true,
     toneId: '',
-    questions: []
+    questions: [],
+    faceHeadImage: '',
+    tongHeadImage: ''
 
   },
   actions: {
@@ -164,7 +166,13 @@ export default new Vuex.Store({
       var aObjc = state.questions[objc.index]
       aObjc['answer'] = objc.answer
       state.questions[objc.index] = aObjc
-    }
+    },
+    SET_FACE_IMG: (state, { faceHeadImage }) => {
+      state.faceHeadImage = faceHeadImage
+    },
+    SET_TONG_IMG: (state, { tongHeadImage }) => {
+      state.tongHeadImage = tongHeadImage
+    },
 
   },
   getters: {

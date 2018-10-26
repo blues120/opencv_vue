@@ -92,6 +92,10 @@ export default {
   components: {
     PhotoView
   },
+  activated () {
+    console.log('activated')
+    this.imgUrl = this.$store.state.tongHeadImage
+  },
   created () {
     this.imgUrl = this.$route.params.picValue
   },

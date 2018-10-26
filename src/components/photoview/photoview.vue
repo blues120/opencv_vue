@@ -41,6 +41,9 @@ export default {
     postImg () {
       //这里写接口
       if (this.commonFlag === false) {
+        this.$store.commit('SET_FACE_IMG',{
+          'faceHeadImage': this.headerImage
+        })
         this.$router.push({
           name: 'seconldPage',
           params: {
@@ -48,6 +51,9 @@ export default {
           }
         })
       }else{
+        this.$store.commit('SET_TONG_IMG',{
+          'tongHeadImage': this.headerImage
+        })
         this.$router.push({
           name: 'thirdPage',
           params: {
