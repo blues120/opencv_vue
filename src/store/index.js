@@ -172,7 +172,7 @@ export default new Vuex.Store({
     },
     SET_TONG_IMG: (state, { tongHeadImage }) => {
       state.tongHeadImage = tongHeadImage
-    },
+    }
 
   },
   getters: {
