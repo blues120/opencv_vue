@@ -167,7 +167,7 @@ export default {
       }
     },
     getPhoto () {
-      var imageInput = document.querySelector('#image-input')
+      var imageInput = document.querySelector('#upload')
       var that = this
       imageInput.addEventListener('change', function (e) {
         let reads = new FileReader()
@@ -218,7 +218,11 @@ export default {
                   rotateCanvas.height = that.previewImg.height
                   rotateCtx.drawImage(that.previewImg, 0, 0, that.previewImg.width, that.previewImg.height)
               }
-              rotateCanvas.toDataURL('image/jpeg', 0.1)
+              // var rotateBase64 = rotateCanvas.toDataURL('image/jpeg', 0.5)
+              // var a = document.createElement('a')
+              // a.href = rotateBase64
+              // a.download = 'hha'
+              // a.click()
             })
           })
         })
@@ -276,7 +280,7 @@ export default {
     },
     createPhoto () {
       if (this.imgUrl) {
-        let photoBox = document.querySelector('.preview-box')
+        let photoBox = document.querySelector('#preview-img')
         let newImgWidth = photoBox.style.offsetWidth
         let newImgHeight = photoBox.style.offsetHeight
         let scale = window.devicePixelRatio

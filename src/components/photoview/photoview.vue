@@ -85,8 +85,8 @@ export default {
             img.src = result;
 
             self.headerImage = this.result;
-            self.postImg()
-            return
+            // self.postImg()
+            // return
             //判断图片是否大于100K,是就直接上传，反之压缩图片
             if (this.result.length <= (100 * 1024)) {
               self.headerImage = this.result;
@@ -209,7 +209,7 @@ export default {
         }
       }
       //进行最小压缩
-      let ndata = canvas.toDataURL('image/jpeg', 0.1);
+      let ndata = canvas.toDataURL('image/jpeg', 0.8);
       console.log('压缩前：' + initSize);
       console.log('压缩后：' + ndata.length);
       console.log('压缩率：' + ~~(100 * (initSize - ndata.length) / initSize) + "%");

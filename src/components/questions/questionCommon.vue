@@ -120,6 +120,12 @@ export default {
       if (this.index === 13) {
         this.$store.dispatch('ZW_EXAMINATIONS').then(res => {
           window.location.href = res['report_url']
+          // window.open = res['report_url']
+          var a = document.createElement('a')
+          // a.href = 'https://openapi-dev.zhiyuntcm.com/#/history/SREz8j4CbqbsLseQ'
+          // a.setAttribute('target', '_blank')
+          // a.click()
+          // window.open = 'https://openapi-dev.zhiyuntcm.com/#/history/SREz8j4CbqbsLseQ'
         })
       } else {
         var tempName = 'question' + (this.index + 1)

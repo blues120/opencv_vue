@@ -97,7 +97,7 @@ export default {
     this.imgUrl = this.$store.state.tongHeadImage
   },
   created () {
-    this.imgUrl = this.$route.params.picValue
+    // this.imgUrl = this.$route.params.picValue
   },
   mounted () {
     this.previewImg = document.querySelector('#preview-img')
@@ -255,7 +255,7 @@ export default {
     },
     createPhoto () {
       if (this.imgUrl) {
-        let photoBox = document.querySelector('.preview-box')
+        let photoBox = document.querySelector('#preview-img')
         let newImgWidth = photoBox.style.offsetWidth
         let newImgHeight = photoBox.style.offsetHeight
         let scale = window.devicePixelRatio
