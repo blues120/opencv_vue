@@ -86,7 +86,8 @@ export default {
         },
         scale: 1,
         lastScale: 1
-      }
+      },
+      btnFlag: false
     }
   },
   components: {
@@ -137,12 +138,18 @@ export default {
       this.$router.go(-1)
     },
     nextStep () {
-      if (this.$store.state.tongDetectRes === true) {
-        this.$router.push({
-          'name': 'question1'
-        })
-      } else {
-        this.createPhoto()
+      if (this.btnFlag === false) {
+        this.btnFlag = true
+        setTimeout(function () {
+          this.btnFlag = false
+        }, 1000)
+        if (this.$store.state.tongDetectRes === true) {
+          this.$router.push({
+            'name': 'question1'
+          })
+        } else {
+          this.createPhoto()
+        }
       }
     },
     getPhoto () {

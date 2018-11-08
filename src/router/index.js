@@ -21,6 +21,7 @@ import question13 from '@/components/questions/question_13'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',

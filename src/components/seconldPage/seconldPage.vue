@@ -104,7 +104,8 @@ export default {
         },
         scale: 1,
         lastScale: 1
-      }
+      },
+      btnFlag: false
     }
   },
   components: {
@@ -158,12 +159,18 @@ export default {
       this.$router.go(-1)
     },
     nextStep () {
-      if (this.$store.state.faceDetectRes === true) {
-        this.$router.push({
-          'name': 'thirdPage'
-        })
-      } else {
-        this.createPhoto()
+      if (this.btnFlag === false) {
+        this.btnFlag = true
+        setTimeout(function () {
+          this.btnFlag = false
+        }, 1000)
+        if (this.$store.state.faceDetectRes === true) {
+          this.$router.push({
+            'name': 'thirdPage'
+          })
+        } else {
+          this.createPhoto()
+        }
       }
     },
     getPhoto () {

@@ -37,6 +37,7 @@
   </div>
   <div class="nextBtnBg">
     <mu-button large color="primary" full-width @click="openSimpleDialog">拍照，从面诊开始</mu-button>
+    <!--<button type="button" onclick="openSimpleDialog">点击这里</button>-->
   </div>
   <mu-container>
     <mu-dialog  width="360" :open.sync="openSimple">
