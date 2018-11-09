@@ -1,6 +1,6 @@
 <!--suppress ALL -->
 <template>
-<div class="backGround">
+<div class="backGround" :style="backgroundDiv">
   <div class="alreadyAnswerQuestion">
   <div style="float: right;margin-right: 35px">
     <div>
@@ -34,8 +34,8 @@
         下一题
       </button>
     </mu-flex>
-
   </div>
+
 </div>
 </template>
 
@@ -53,7 +53,10 @@ export default {
       ABCD: ['A', 'B', 'C', 'D'],
       answerArray: [],
       multiple: false,
-      exclusiveOption: 0
+      exclusiveOption: 0,
+      backgroundDiv: {
+        backgroundImage: 'url(' + require('../../assets/background.png') + ')'
+      }
     }
   },
   created () {
@@ -143,7 +146,7 @@ export default {
   min-height: 100%;
   /*height: auto;*/
   overflow-y: visible;
-  background: url('../../assets/background.png') 0% 0% / cover rgb(85, 140, 228);
+  background:  0% 0% / cover rgb(85, 140, 228);
   border-width: 1px;
   border-style: solid;
   border-color: transparent;
