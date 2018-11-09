@@ -4,9 +4,11 @@ import Vuex from 'vuex'
 import axios from 'axios'
 // import Tools from '../utils/Tools.js'
 // import qs from 'qs'
+import createPersistedState from 'vuex-persistedstate'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  plugins: [createPersistedState()],
   store: {
     loginName: '',
     registration_url: '',
