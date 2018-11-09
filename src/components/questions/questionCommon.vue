@@ -143,7 +143,7 @@ export default {
   min-height: 100%;
   /*height: auto;*/
   overflow-y: visible;
-  background: url('../../assets/background.png') 0% 0% / cover rgb(242, 242, 242);
+  background: url('../../assets/background.png') 0% 0% / cover rgb(85, 140, 228);
   border-width: 1px;
   border-style: solid;
   border-color: transparent;
