@@ -149,11 +149,14 @@ export default {
       }
     },
     reTakePhoto () {
-      this.sheetOpen = true
+      this.sheetOpen = false
+      this.openSimple = false
+      this.openTongueSimple = false
+      // this.sheetOpen = true
       // this.openSimple = false
       // this.$router.go(-1)
-      // var takePicture = document.getElementById('upload')
-      // takePicture.click()
+      var takePicture = document.getElementById('upload')
+      takePicture.click()
     },
     goBack () {
       this.$router.go(-1)
@@ -164,13 +167,14 @@ export default {
         setTimeout(function () {
           this.btnFlag = false
         }, 1000)
-        if (this.$store.state.faceDetectRes === true) {
-          this.$router.push({
-            'name': 'thirdPage'
-          })
-        } else {
-          this.createPhoto()
-        }
+        this.createPhoto()
+        // if (this.$store.state.faceDetectRes === true) {
+        //   this.$router.push({
+        //     'name': 'thirdPage'
+        //   })
+        // } else {
+        //   this.createPhoto()
+        // }
       }
     },
     getPhoto () {

@@ -39,6 +39,7 @@ export default {
       console.log(this.picValue)
     },
     postImg () {
+      this.$refs.referenceUpload.value = null
       //这里写接口
       if (this.commonFlag === false) {
         this.$store.commit('SET_FACE_IMG',{
@@ -60,8 +61,8 @@ export default {
             picValue: this.headerImage
           }
         })
-      }
 
+      }
     },
     imgPreview (file) {
       let self = this;

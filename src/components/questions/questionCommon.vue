@@ -122,6 +122,10 @@ export default {
       console.log(this.$store.state.questions)
       if (this.index === 13) {
         this.$store.dispatch('ZW_EXAMINATIONS').then(res => {
+          window.localStorage.clear()
+          window.sessionStorage.clear()
+
+          this.$router.replace({name: 'firstPage'})
           window.location.href = res['report_url']
           // window.open = res['report_url']
           // var a = document.createElement('a')

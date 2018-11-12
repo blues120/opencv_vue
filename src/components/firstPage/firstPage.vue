@@ -117,7 +117,9 @@ export default {
       this.openSimple = true
     },
     startPictureAlert () {
-      this.open = true
+      // this.open = true
+      var takePicture = document.getElementById('upload')
+      takePicture.click()
     },
     closeSimpleDialog () {
       this.openSimple = false
@@ -127,7 +129,9 @@ export default {
       this.open = false
     },
     openBotttomSheet () {
-      this.open = true
+      // this.open = true
+      var takePicture = document.getElementById('upload')
+      takePicture.click()
     },
     BottomNavChange (value) {
       this.open = false

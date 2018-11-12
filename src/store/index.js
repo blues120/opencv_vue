@@ -62,6 +62,9 @@ export default new Vuex.Store({
             const id = response.data['id']
             commit('SET_FACE_DETECT_RES', { faceDetectRes: detectRes })
             commit('SET_FACE_ID', { faceId: id })
+            commit('SET_FACE_IMG', {
+              'faceHeadImage': ''
+            })
             return resolve(detectRes)
           }, error => {
             return reject(error)
@@ -86,6 +89,9 @@ export default new Vuex.Store({
             const id = response.data['id']
             commit('SET_TONG_DETECT_RES', { tongDetectRes: detectRes })
             commit('SET_TONG_ID', { tongueId: id })
+            commit('SET_TONG_IMG', {
+              'tongHeadImage': ''
+            })
             return resolve(detectRes)
           }, error => {
             return reject(error)

@@ -98,7 +98,7 @@ export default {
     this.imgUrl = this.$store.state.tongHeadImage
   },
   created () {
-    // this.imgUrl = this.$route.params.picValue
+    this.imgUrl = this.$route.params.picValue
   },
   mounted () {
     this.previewImg = document.querySelector('#preview-img')
