@@ -128,11 +128,11 @@ export default {
       }
     },
     reTakePhoto () {
-      this.sheetOpen = true
-      // this.openSimple = false
+      this.sheetOpen = false
+      this.openSimple = false
       // this.$router.go(-1)
-      // var takePicture = document.getElementById('upload')
-      // takePicture.click()
+      var takePicture = document.getElementById('upload')
+      takePicture.click()
     },
     goBack () {
       this.$router.go(-1)
@@ -326,7 +326,7 @@ export default {
           img.src = result
 
           // 判断图片是否大于100K,是就直接上传，反之压缩图片
-          if (this.result.length <= (8 * 1024)) {
+          if (this.result.length <= (100 * 1024)) {
             self.headerImage = this.result
             self.uploadImage()
           } else {
@@ -414,7 +414,7 @@ export default {
       ctx.fillRect(0, 0, canvas.width, canvas.height)
       // 如果图片像素大于100万则使用瓦片绘制
       let count
-      if ((count = width * height / 1000000) > 1) {
+      if ((count = width * height / 10000000) > 1) {
         console.log('超过100W像素')
         count = ~~(Math.sqrt(count) + 1) // 计算要分成多少块瓦片
         //            计算每块瓦片的宽和高
@@ -447,7 +447,7 @@ export default {
         }
       }
       // 进行最小压缩
-      let ndata = canvas.toDataURL('image/jpeg', 0.1)
+      let ndata = canvas.toDataURL('image/jpeg', 0.8)
       console.log('压缩前：' + initSize)
       console.log('压缩后：' + ndata.length)
       console.log('压缩率：' + ~~(100 * (initSize - ndata.length) / initSize) + '%')

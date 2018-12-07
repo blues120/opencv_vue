@@ -50,7 +50,7 @@ export default {
     return {
       questionsArray: [],
       questionsTitle: '',
-      ABCD: ['A', 'B', 'C', 'D'],
+      ABCD: ['A', 'B', 'C', 'D', 'E'],
       answerArray: [],
       multiple: false,
       exclusiveOption: 0,
@@ -199,7 +199,7 @@ export default {
   }
   .btnClass {
     position: absolute;
-    bottom: 80px;
+    bottom: 10%;
     width: 100%;
     /*display: flex;*/
     /*-webkit-box-pack: justify;*/
