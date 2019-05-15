@@ -3,6 +3,9 @@
  * @param obj 对象
  * @returns true||false
  */
+export function isEmail (s) {
+  return /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/.test(s)
+}
 var Tools = {
   isArray: function (obj) {
     return Object.prototype.toString.call(obj) === '[object Array]'

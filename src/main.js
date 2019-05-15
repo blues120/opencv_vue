@@ -5,9 +5,13 @@ import App from './App'
 import router from './router'
 import store from './store'
 import 'muse-ui/dist/muse-ui.css'
-// import httpRequest from '@/utils/httpRequest'
+import httpRequest from '@/utils/httpRequest'
 // import { isAuth } from '@/utils' // 权限方法
 import 'jquery'
+
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
 import {
   Alert,
   AppBar,
@@ -57,15 +61,14 @@ import 'muse-ui/lib/styles/theme.less'
 
 import 'muse-ui-message/dist/muse-ui-message.css'
 import Message from 'muse-ui-message'
-// import axios from 'axios'
+import axios from 'axios'
 import VueCookie from 'vue-cookie'
 // 挂载全局
-// Vue.prototype.$http = httpRequest // ajax请求方法
-// Vue.prototype.isAuth = isAuth
-// // 保存整站vuex本地储存初始状态
-// window.axios = axios
+Vue.prototype.$http = httpRequest // ajax请求方法
+// Vue.prototype.isAuth = isAuth     // 权限方法
+Vue.prototype.urlPrefix = 'http://localhost:8083/opencv' // 全局挂載api接口
 
-// axios.defaults.baseURL = 'http://192.168.100.150:8080/memberCard'
+axios.defaults.baseURL = 'http://localhost:8083/opencv'
 // axios.defaults.autofaceURL = 'http://192.168.100.150:8080/memberCard'
 
 Vue.use(VueCookie)
@@ -114,6 +117,8 @@ Vue.use(Switch)
 Vue.use(Tabs)
 Vue.use(TextField)
 Vue.use(Tooltip)
+
+Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */
