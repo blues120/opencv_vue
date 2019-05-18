@@ -91,7 +91,6 @@ export default {
           'password': this.dataForm.password
         }
       }).then(({data}) => {
-
         if (data && data.code === 0) {
           this.$cookie.set('token', data.token)
 
