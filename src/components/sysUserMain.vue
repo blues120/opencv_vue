@@ -362,7 +362,7 @@ export default {
         form.append('bgFiles', this.bgFiles[0])
         form.append('threshold', this.threshold)
         form.append('projectName', this.projectName)
-        form.append('userSelect', this.userSelect)
+        form.append('userSelect', JSON.stringify(this.userSelect))
         // var config = {
         //   onUploadProgress: progressEvent => {
         //     var complete = (progressEvent.loaded / progressEvent.total * 100 | 0) + '%'
