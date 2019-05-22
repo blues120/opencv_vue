@@ -1,5 +1,5 @@
 <template>
-  <div class="backGround" :style="backgroundDiv">
+  <div class="backGround" :style="backgroundDiv" style="overflow: scroll">
 
     <el-row>
       <el-col :span="12">
@@ -228,7 +228,7 @@
       <!--</h3>-->
 
     <!--</div>-->
-    <div style="width: 400px;height: 500px;background-color: red">
+    <div style="width: 400px;height: 500px;">
 
     </div>
   </div>
@@ -375,6 +375,11 @@ export default {
         // 添加请求头
         axios.post('/api/project/uploadFile', form, config)
           .then(response => {
+            if (response.data.code === 200) {
+              this.$alert('加密成功', '提示')
+            } else {
+              this.$alert(response.data.msg, '提示')
+            }
             console.log(response.data)
           })
       } else {
