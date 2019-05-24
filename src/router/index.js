@@ -33,11 +33,25 @@ import userDialog from '@/components/generator/tuser-add-or-update'
 import projectDialog from '@/components/generator/tproject-add-or-update'
 import userfileDialog from '@/components/generator/tuserfile-add-or-update'
 
+import userManage from '@/components/userManage'
+
+import normalUser from '@/components/normalUser'
+
 Vue.use(Router)
 
 export default new Router({
   // mode: 'history',
   routes: [
+    {
+      path: '/normalUser',
+      name: 'normalUser',
+      component: normalUser
+    },
+    {
+      path: '/userManage',
+      name: 'userManage',
+      component: userManage
+    },
     {
       path: '/',
       name: 'login',

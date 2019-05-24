@@ -164,7 +164,24 @@
       </el-col>
       <!--<div style="float:left;width: 1px;height: 2000px; background: #fff;"></div>-->
       <el-col :span="12" >
-        解密部分
+
+          <div style="float: right;margin-top: 50px;margin-right: 50px">
+
+            <el-row>
+              <el-button @click="backClick()">返回</el-button>
+            </el-row>
+            <el-row style="margin-top: 30px">
+              <el-button @click="userManageClick()">用户管理</el-button>
+            </el-row>
+            <el-row style="margin-top: 300px">
+              <el-button @click="DecryptPicture()">解密</el-button>
+            </el-row>
+
+          </div>
+
+        <div>
+          解密部分
+        </div>
         <div style="background-color: white;border: 1px solid #fff;width: 500px;height: 250px;">
           <el-table
             :data="projectList"
@@ -231,6 +248,8 @@
     <div style="width: 400px;height: 500px;">
 
     </div>
+
+    <userManage v-if="isUserManageVisible" ref="userManage"></userManage>
   </div>
 </template>
 
@@ -238,11 +257,13 @@
 import Tools from '../utils/Tools.js'
 import ImageInputer from '../components/ImageUploader'
 import axios from 'axios'
+import userManage from './userManage'
 
 export default {
   name: 'sysUserMain',
   data () {
     return {
+      isUserManageVisible: false,
       maxSize: 3072,
       backgroundDiv: {
         backgroundImage: 'url(' + require('../assets/background.png') + ')'
@@ -278,7 +299,8 @@ export default {
           { required: true, message: '密码不能为空', trigger: 'blur' }
         ]
       },
-      captchaPath: ''
+      captchaPath: '',
+      selectObjc: {}
     }
   },
   created () {
@@ -295,11 +317,42 @@ export default {
     }
   },
   components: {
-    ImageInputer
+    ImageInputer,
+    userManage
   },
   methods: {
+    DecryptPicture () {
+      if (typeof (this.selectObjc) === 'undefined') {
+        this.$alert('请选择项目', '提示')
+      }
+
+      this.$http({
+        url: this.$http.adornUrl('/api/project/decrptPicture'),
+        method: 'get',
+        params: this.$http.adornParams({
+
+        })
+      }).then(({data}) => {
+        if (data && data.code === 0) {
+
+        } else {
+
+        }
+      })
+    },
+    backClick () {
+      this.$router.replace({ name: 'login' })
+    },
+    userManageClick () {
+      this.isUserManageVisible = true
+
+      this.$nextTick(() => {
+        this.$refs.userManage.init(1)
+      })
+    },
     // 当前页
     currentChangeHandle (val) {
+      this.selectObjc =val[0]
       this.$refs.Table.toggleRowSelection(val)
     },
     // 获取数据列表

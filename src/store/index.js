@@ -19,7 +19,8 @@ export default new Vuex.Store({
     toneId: '',
     questions: [],
     faceHeadImage: '',
-    tongHeadImage: ''
+    tongHeadImage: '',
+    userId: 0
 
   },
   actions: {
@@ -180,6 +181,9 @@ export default new Vuex.Store({
     },
     SET_TONG_IMG: (state, { tongHeadImage }) => {
       state.tongHeadImage = tongHeadImage
+    },
+    SET_USER_ID: (state, { userId }) => {
+      state.userId = userId
     }
 
   },

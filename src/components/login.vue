@@ -93,9 +93,12 @@ export default {
       }).then(({data}) => {
         if (data && data.code === 0) {
           this.$cookie.set('token', data.token)
+          this.$store.commit('SET_USER_ID', {
+            'userId': data.userId
+          })
 
           if (data.type === 1) {
-
+            this.$router.replace({ name: 'normalUser' })
           } else {
             this.$router.replace({ name: 'sysUserMain' })
           }
