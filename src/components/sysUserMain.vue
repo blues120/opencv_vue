@@ -184,7 +184,7 @@
         </div>
         <div style="background-color: white;border: 1px solid #fff;width: 500px;height: 250px;">
           <el-table
-            :data="projectList"
+            :data="projectFileList"
             border
             @selection-change="currentChangeHandle"
             style="width: 100%;">
@@ -329,9 +329,11 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/api/project/decrptPicture'),
         method: 'get',
-        params: this.$http.adornParams({
-
-        })
+        params: this.$http.adornParams(
+          {
+            id: this.selectObjc.id
+          }
+        )
       }).then(({data}) => {
         if (data && data.code === 0) {
 
@@ -352,7 +354,7 @@ export default {
     },
     // 当前页
     currentChangeHandle (val) {
-      this.selectObjc =val[0]
+      this.selectObjc = val[0]
       this.$refs.Table.toggleRowSelection(val)
     },
     // 获取数据列表
