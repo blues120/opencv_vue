@@ -125,7 +125,7 @@ export default {
       files: {}
     }
   },
-  created () {
+  activated () {
     this.getProjectFileList()
     this.getProjectList()
   },
@@ -167,7 +167,7 @@ export default {
         })
     },
     backClick () {
-      this.$router.replace({ name: 'login' })
+      this.$router.go(-1)
     },
     userManageClick () {
       this.isUserManageVisible = true

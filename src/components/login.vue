@@ -98,9 +98,9 @@ export default {
           })
 
           if (data.type === 1) {
-            this.$router.replace({ name: 'normalUser' })
+            this.$router.push({ name: 'normalUser' })
           } else {
-            this.$router.replace({ name: 'sysUserMain' })
+            this.$router.push({ name: 'sysUserMain' })
           }
         } else {
           this.$alert(data.msg, '提示')

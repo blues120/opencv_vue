@@ -184,7 +184,7 @@
         </div>
         <div style="background-color: white;border: 1px solid #fff;width: 500px;height: 250px;">
           <el-table
-            :data="projectFileList"
+            :data="projectList"
             border
             @selection-change="currentChangeHandle"
             style="width: 100%;">
@@ -205,7 +205,7 @@
         </div>
         <div style="background-color: white;border: 1px solid #fff;width: 500px;height: 250px;margin-top: 20px">
           <el-table
-            :data="projectList"
+            :data="projectFileList"
             border
             style="width: 100%;">
             <el-table-column
